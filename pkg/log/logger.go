@@ -3,14 +3,16 @@ package log
 import (
 	"log"
 	"fmt"
+	"runtime"
 )
 
 func init() {
-	log.SetFlags(log.Ltime | log.Ldate | log.Lshortfile)
+	log.SetFlags(log.Ltime | log.Ldate )
 }
 
 func Infoln(v ...interface{}) {
-	log.Println("[INFO]",fmt.Sprintln(v...))
+	_,f,l,_:=runtime.Caller(1)
+	fmt.Println("[INFO]",f,l,fmt.Sprint(v...))
 }
 
 func Errorln(v ...interface{}) {
